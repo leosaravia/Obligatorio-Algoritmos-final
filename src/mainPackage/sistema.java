@@ -140,10 +140,10 @@ public class sistema implements Isistema {
 
         if (a == null) {
             System.out.println("No existe la ambulancia");
-        } else if (listaAmbulancias.getAmbulancia(ambulanciaID).isHabilitada()) {
+        } else if (a.isHabilitada()) {
             System.out.println("“La ambulancia " + ambulanciaID + " ya está en estado habilitado");
         } else {
-            listaAmbulancias.getAmbulancia(ambulanciaID).setHabilitada(true);
+            a.setHabilitada(true);
             System.out.println("Estado modificado satisfactoriamente");
             retorno = true;
         }
@@ -271,7 +271,7 @@ public class sistema implements Isistema {
     public TipoRet agregarRuta(int ciudadOrigen, int ciudadDestino, int minutosViaje) {
         Ciudad c1 = listaCiudad.getCiudad(ciudadOrigen);
         Ciudad c2 = listaCiudad.getCiudad(ciudadDestino);
-        boolean flag = false;
+        boolean retorno = false;
 
         if (c1 == null) {
             System.out.println("La ciudad origen no existe");
@@ -285,11 +285,11 @@ public class sistema implements Isistema {
                     System.out.println("Ruta agregada correctamente");
                     mapa[ciudadOrigen][ciudadDestino] = minutosViaje;
                     mapa[ciudadDestino][ciudadOrigen] = minutosViaje;
-                    flag = true;
+                    retorno = true;
                 }
             }
         }
-        if (flag) {
+        if (retorno) {
             return TipoRet.OK;
         } else {
             return TipoRet.ERROR;
@@ -302,7 +302,7 @@ public class sistema implements Isistema {
     public TipoRet modificarDemora(int ciudadOrigen, int ciudadDestino, int minutosViaje) {
         Ciudad c1 = listaCiudad.getCiudad(ciudadOrigen);
         Ciudad c2 = listaCiudad.getCiudad(ciudadDestino);
-        boolean flag = false;
+        boolean retorno = false;
 
         if (c1 == null) {
             System.out.println("La ciudad origen no existe");
@@ -318,11 +318,11 @@ public class sistema implements Isistema {
                     System.out.println("Ruta modificada correctamente");
                     mapa[ciudadOrigen][ciudadDestino] = minutosViaje;
                     mapa[ciudadDestino][ciudadOrigen] = minutosViaje;
-                    flag = true;
+                    retorno = true;
                 }
             }
         }
-        if (flag) {
+        if (retorno) {
             return TipoRet.OK;
         } else {
             return TipoRet.ERROR;

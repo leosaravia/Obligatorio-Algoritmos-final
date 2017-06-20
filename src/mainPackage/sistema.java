@@ -81,7 +81,7 @@ public class sistema implements Isistema {
         return TipoRet.OK;
     }
 
-    //PRE: Ingresa Int en idCiudad
+    //PRE: Ingresa numero en idCiudad
     //POST: si la ciudad existe y la ambulancia aún  no, entonces da el alta de la misma. Si no,  devuelve mensaje de error
     /*NOTA: FALTA MODIFICAR LA FUNCIÓN PARA QUE INGRESE ORDENADAMENTE SEGÚN IDAMBULANCIA DE FORMA ASCENDENTE*/
     @Override
@@ -117,10 +117,10 @@ public class sistema implements Isistema {
 
         if (a == null) {
             System.out.println("No existe la ambulancia");
-        } else if (!listaAmbulancias.getAmbulancia(ambulanciaId).isHabilitada()) {
+        } else if (!a.isHabilitada()) {
             System.out.println("“La ambulancia " + ambulanciaId + " ya está en estado no disponible");
         } else {
-            listaAmbulancias.getAmbulancia(ambulanciaId).setHabilitada(false);
+            a.setHabilitada(false);
             System.out.println("Estado modificado satisfactoriamente");
             retorno = true;
         }

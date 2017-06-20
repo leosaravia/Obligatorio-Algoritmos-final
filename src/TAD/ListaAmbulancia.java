@@ -37,21 +37,7 @@ public class ListaAmbulancia {
         head = null;
         size = 0;
     }
-
-    //Obtener elemento en la posicion que quieramos
-    //TODO : pasar ambulancia en vez de index
-    /* public Object Obtener(Ambulancia ambulancia)
-    {
-        int contador =0;
-        NodoAmbulancia temporal = head;
-        
-        while(contador <= ambulancia)
-        {
-            temporal = temporal.obtenerSiguiente();
-            contador++;
-        }
-        return temporal.ObtenerValor();
-    }*/
+    
     //Agrega un elemento al head(primero elemento de la lista)
     public void agregarInicio(Ambulancia ambulancia) {
         if (head == null) {

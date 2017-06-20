@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mainPackage;
 
 import Dominio.Ambulancia;
@@ -11,15 +7,9 @@ import Dominio.Ciudad;
 import TAD.ListaAmbulancia;
 import TAD.ListaChofer;
 import TAD.ListaCiudad;
-import TAD.NodoChofer;
 
-/**
- *
- * @author Usuario
- */
 public class sistema implements Isistema {
-
-    //METODOS EXTRA
+    
     ListaAmbulancia listaAmbulancias;
     ListaChofer listaChofer;
     ListaCiudad listaCiudad;
@@ -403,11 +393,11 @@ public class sistema implements Isistema {
             System.out.println("La ciudad " + ciudadID + " no existe.");
         } else {
             ret = true;
-        }
-        //Imprime en pantalla que? el ID o el nombre? ver ya que sería mucho más eficiente que solo sea el ID
-        for (int i = 1; i < col; i++) {
-            if (mapa[ciudadID][i] <= duracionViaje && mapa[ciudadID][i] > 0) {
-                System.out.println("Ciudad: " + listaCiudad.getCiudad(mapa[ciudadID][i]).getNombre() + "\n");
+            //Imprime en pantalla que? el ID o el nombre? ver ya que sería mucho más eficiente que solo sea el ID
+            for (int i = 1; i < col; i++) {
+                if (mapa[ciudadID][i] <= duracionViaje && mapa[ciudadID][i] > 0) {
+                    System.out.println("Ciudad: " + listaCiudad.getCiudad(mapa[ciudadID][i]).getNombre() + "\n");
+                }
             }
         }
         if (ret) {

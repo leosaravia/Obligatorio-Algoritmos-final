@@ -275,7 +275,7 @@ public class sistema implements Isistema {
         }
     }
 
-    //PRE: El monto minutos de viaje debe ser un int
+    //PRE: Se ingresan las dos ciudades o coordenadas y la duracion del viaje de una a otra. 
     //POST: agrega demora a la coordenada de ciudad origen y ciudad destino. 
     @Override
     public TipoRet agregarRuta(int ciudadOrigen, int ciudadDestino, int minutosViaje) {
@@ -389,11 +389,32 @@ public class sistema implements Isistema {
         return TipoRet.NO_IMPLEMENTADA;
     }
 
-    //Falta hace
+    //PRE: Ingresamos un id de ciudad y una duración de viaje
+    //POST: Imprime en pantalla todas las ciudades que tengan una duración de viaje menor a la ingresada. 
+    //NOTA: Solo retorna error si la ciudad no existe o si la duración es <=0. 
     @Override
     public TipoRet ciudadesEnRadio(int ciudadID, int duracionViaje) {
-       
-        return TipoRet.NO_IMPLEMENTADA;
+        boolean ret = false;
+        int col = mapa[0].length;
+
+        if (duracionViaje <= 0) {
+            System.out.println("La duración del viaje debe ser mayor a 0");
+        } else if (!listaCiudad.existeCiudad(ciudadID)) {
+            System.out.println("La ciudad " + ciudadID + " no existe.");
+        } else {
+            ret = true;
+        }
+        //Imprime en pantalla que? el ID o el nombre? ver ya que sería mucho más eficiente que solo sea el ID
+        for (int i = 1; i < col; i++) {
+            if (mapa[ciudadID][i] <= duracionViaje && mapa[ciudadID][i] > 0) {
+                System.out.println("Ciudad: " + listaCiudad.getCiudad(mapa[ciudadID][i]).getNombre() + "\n");
+            }
+        }
+        if (ret) {
+            return TipoRet.OK;
+        } else {
+            return TipoRet.ERROR;
+        }
     }
 
     /*PRE:  No existe un chofer de cédula cedula como chofer habilitado para conducir la ambulancia ambulanciaID. */

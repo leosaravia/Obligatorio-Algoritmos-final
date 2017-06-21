@@ -1,32 +1,43 @@
 package TestsPackage;
 
-import mainPackage.GestionAmbulancia;
-import mainPackage.Isistema;
 import org.junit.Assert;
 import org.junit.Test;
+import mainPackage.ISistema;
+import mainPackage.SistemaAmbulancia;
 
 
 public class testCrearAmbulancia {
     
-    @Test
-    public void testCrearUnaAmbulancia(){
-        GestionAmbulancia g = new GestionAmbulancia();
-        Assert.assertEquals(Isistema.TipoRet.OK, g.registrarAmbulancia("ABC123", 1));
-    }
+//    @Test
+//    public void testCrearUnaAmbulancia(){
+//        GestionAmbulancia g = new GestionAmbulancia();
+//        Assert.assertEquals(ISistema.TipoRet.OK, g.registrarAmbulancia("ABC123", 1));
+//    }
     
     @Test
     public void testCrearTresAmbulancia(){
-        GestionAmbulancia g = new GestionAmbulancia();
-        Assert.assertEquals(Isistema.TipoRet.OK, g.registrarAmbulancia("ABC123", 1));
-        Assert.assertEquals(Isistema.TipoRet.OK, g.registrarAmbulancia("ABC456", 2));
-        Assert.assertEquals(Isistema.TipoRet.OK, g.registrarAmbulancia("ABC897", 3));
+        SistemaAmbulancia g = new SistemaAmbulancia();
+        g.crearSistemaDeEmergencias(10);
+        g.agregarCiudad("Montevideo");
+        g.agregarCiudad("Maldonado");
+        g.agregarCiudad("Lavalleja");
+        Assert.assertEquals(ISistema.TipoRet.OK, g.registrarAmbulancia("ABC123", 1));
+        Assert.assertEquals(ISistema.TipoRet.OK, g.registrarAmbulancia("ABC897", 2));
+        Assert.assertEquals(ISistema.TipoRet.OK, g.registrarAmbulancia("ABC456", 3));
     }
     
     @Test
-    public void testCrearAmbulanciaError(){
-        GestionAmbulancia g = new GestionAmbulancia();
-        g.registrarAmbulancia("ABC123", 1);//Ingreso una ambulancia que ya existe
-        Assert.assertEquals(Isistema.TipoRet.OK, g.registrarAmbulancia("ABC123", 1));
+    public void testCrearCincoAmbulancia(){
+        SistemaAmbulancia g = new SistemaAmbulancia();
+        g.crearSistemaDeEmergencias(10);
+        g.agregarCiudad("Montevideo");
+        g.agregarCiudad("Maldonado");
+        g.agregarCiudad("Lavalleja");
+        Assert.assertEquals(ISistema.TipoRet.OK, g.registrarAmbulancia("ABC123", 1));
+        Assert.assertEquals(ISistema.TipoRet.OK, g.registrarAmbulancia("ABC897", 2));
+        Assert.assertEquals(ISistema.TipoRet.OK, g.registrarAmbulancia("ABC456", 3));
+        Assert.assertEquals(ISistema.TipoRet.OK, g.registrarAmbulancia("FBC456", 3));
+        Assert.assertEquals(ISistema.TipoRet.OK, g.registrarAmbulancia("ZBC456", 3));
     }
     
     //Agegar cuando no existe la cuidad. 

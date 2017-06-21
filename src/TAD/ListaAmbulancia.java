@@ -37,17 +37,26 @@ public class ListaAmbulancia {
         head = null;
         size = 0;
     }
-    
+
     //Agrega un elemento al head(primero elemento de la lista)
     public void agregarInicio(Ambulancia ambulancia) {
         if (head == null) {
             head = new NodoAmbulancia(ambulancia);
         } else {
+            boolean flag = false;
             //creamos un nodo temporal para almacenar el head y luego lo enlazamos con el nuevo nodo que pasaria a ser el head actual
             NodoAmbulancia temporal = head;
-            NodoAmbulancia nuevo = new NodoAmbulancia(ambulancia);
-            nuevo.enlazarSiguiente(temporal);
-            head = nuevo;
+            while (temporal.obtenerSiguiente() != null) {
+                int esMayor = head.obtenerSiguiente().ObtenerValor().getIdAmbulancia().compareTo(ambulancia.getIdAmbulancia());
+                if (esMayor >= 0) {
+                    temporal = temporal.obtenerSiguiente();
+                } else {
+                    NodoAmbulancia nuevo = new NodoAmbulancia(ambulancia);
+                    nuevo.enlazarSiguiente(temporal);
+                    head = nuevo;
+                    flag = true;
+                }
+            }
         }
         size++;
     }
@@ -56,11 +65,11 @@ public class ListaAmbulancia {
     public boolean eliminar(String ambulanciaID) {
         boolean flag = false;
         NodoAmbulancia aux = head;
-        while(aux != null&&!flag){
+        while (aux != null && !flag) {
             if (aux.valor.getIdAmbulancia().equals(ambulanciaID)) {
                 aux.valor = null;
                 flag = true;
-            }else{
+            } else {
                 aux = aux.obtenerSiguiente();
             }
         }
@@ -120,10 +129,10 @@ public class ListaAmbulancia {
     }
 
     //Devuelve la cantidad de ambulancias habilitadas 
-    public int ambulanciasDisponibles(){
-        int disponibles=0;
-         NodoAmbulancia aux = head;
-        while(aux!=null){
+    public int ambulanciasDisponibles() {
+        int disponibles = 0;
+        NodoAmbulancia aux = head;
+        while (aux != null) {
             if (aux.valor.isHabilitada()) {
                 disponibles++;
             }
@@ -131,12 +140,13 @@ public class ListaAmbulancia {
         }
         return disponibles;
     }
+
     //Devuelve la cantidad de ambulancias deshabilitadas 
-    public int ambulanciasNoDisponibles(){
-        int Nodisponibles=0;
+    public int ambulanciasNoDisponibles() {
+        int Nodisponibles = 0;
         NodoAmbulancia aux = head;
-        
-        while(aux!=null){
+
+        while (aux != null) {
             if (!aux.valor.isHabilitada()) {
                 Nodisponibles++;
             }
@@ -144,7 +154,7 @@ public class ListaAmbulancia {
         }
         return Nodisponibles;
     }
-    
+
     public void listar() {
         // Verifica si la lista contiene elementoa.
         if (!esVacia()) {
@@ -163,41 +173,43 @@ public class ListaAmbulancia {
             }
         }
     }
+
     //busca ambulancia por iD y devuelve el objeto. 
     public Ambulancia getAmbulancia(String idAmb) {
         NodoAmbulancia aux = head;
         Ambulancia a = null;
         boolean flag = false;
-        
-        if (aux==null) {
+
+        if (aux == null) {
             return a;
-        }else{
-        while (aux != null && !flag) {
-            if (aux.valor.getIdAmbulancia().equals(idAmb)) {
-                flag = true;
-                a = aux.valor;
-            } else {
-                aux = aux.obtenerSiguiente();
+        } else {
+            while (aux != null && !flag) {
+                if (aux.valor.getIdAmbulancia().equals(idAmb)) {
+                    flag = true;
+                    a = aux.valor;
+                } else {
+                    aux = aux.obtenerSiguiente();
+                }
             }
-        }
         }
         return a;
     }
-        public boolean existeAmbulancia(String idAmb){
- 
-        boolean existe=false;
- 
-        NodoAmbulancia aux=head;
- 
-        while(aux!=null && !existe){
- 
-            if(aux.ObtenerValor().equals(idAmb)){
-                existe=true;
+
+    public boolean existeAmbulancia(String idAmb) {
+
+        boolean existe = false;
+
+        NodoAmbulancia aux = head;
+
+        while (aux != null && !existe) {
+
+            if (aux.ObtenerValor().equals(idAmb)) {
+                existe = true;
             }
-             
+
             //Actualizamos
-            aux=aux.obtenerSiguiente();
+            aux = aux.obtenerSiguiente();
         }
         return existe;
-        }
+    }
 }

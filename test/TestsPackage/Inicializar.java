@@ -6,7 +6,7 @@
 package TestsPackage;
 
 import mainPackage.Isistema;
-import mainPackage.sistema;
+import mainPackage.SistemaAmbulancia;
 
 /**
  *
@@ -16,7 +16,7 @@ public class Inicializar {
 
     //Inicializa ciudades y ambulancias
     public static Isistema inicializador1() {
-        sistema s = new sistema();
+        SistemaAmbulancia s = new SistemaAmbulancia();
         s.crearSistemaDeEmergencias(100);
         
         //Ciudades
@@ -40,7 +40,7 @@ public class Inicializar {
 
     //Inicializa Solo Ciudades
     public static Isistema inicializadorCiudades() {
-        sistema s = new sistema();
+        SistemaAmbulancia s = new SistemaAmbulancia();
         s.crearSistemaDeEmergencias(100);
         
         //Ciudades
@@ -56,7 +56,7 @@ public class Inicializar {
 
     //Inicializa Solo Ambulancias
     public static Isistema inicializadorAmbulancias(){
-        sistema s = new sistema();
+        SistemaAmbulancia s = new SistemaAmbulancia();
         s.crearSistemaDeEmergencias(100);
         
         //Ambulancias

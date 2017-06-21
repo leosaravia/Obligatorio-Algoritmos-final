@@ -3,8 +3,8 @@ package Dominio;
 import TAD.ListaAmbulancia;
 
 public class Ciudad {
-
-    int codigo=0;
+    static int codigoAutoNum=0;
+    int codigo;
     String nombre;
     ListaAmbulancia listaAmbulancias;
     
@@ -33,9 +33,10 @@ public class Ciudad {
     }
 
     public Ciudad(String nombre) {
-        //codigoAutoNum++;
-        codigo++;
+        codigoAutoNum++;
+        codigo = codigoAutoNum;
         this.nombre = nombre;
+        listaAmbulancias = new ListaAmbulancia();
     }
     public String mostrarCiudades(){
         return "ID: "+codigo+"-"+"Nombre: "+nombre+ "\n";

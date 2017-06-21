@@ -9,7 +9,7 @@ import TestsPackage.Inicializar;
 import Dominio.Ciudad;
 import TAD.ListaCiudad;
 import mainPackage.Isistema;
-import mainPackage.sistema;
+import mainPackage.SistemaAmbulancia;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -94,7 +94,7 @@ public class sistemaTest {
         System.out.println("registrarAmbulancia");
         String ambulanciaId = "GBA 1000";
         int ciudadID = 1;
-        sistema instance = new sistema();
+        SistemaAmbulancia instance = new SistemaAmbulancia();
         Inicializar ini = new Inicializar();
         Isistema.TipoRet expResult = Isistema.TipoRet.OK;
         Isistema.TipoRet result = instance.registrarAmbulancia(ambulanciaId, ciudadID);
@@ -219,7 +219,7 @@ public class sistemaTest {
     public void testAgregarCiudad() {
         System.out.println("agregarCiudad");
         String ciudadNombre = "Bella Union";
-        sistema instance = new sistema();
+        SistemaAmbulancia instance = new SistemaAmbulancia();
         Isistema.TipoRet expResult =  Isistema.TipoRet.OK;;
         Isistema.TipoRet result = instance.agregarCiudad(ciudadNombre);
         assertEquals(expResult, result);

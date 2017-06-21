@@ -1,4 +1,3 @@
-
 package mainPackage;
 
 import Dominio.Ambulancia;
@@ -8,8 +7,8 @@ import TAD.ListaAmbulancia;
 import TAD.ListaChofer;
 import TAD.ListaCiudad;
 
-public class sistema implements Isistema {
-    
+public class SistemaAmbulancia implements Isistema {
+
     ListaAmbulancia listaAmbulancias;
     ListaChofer listaChofer;
     ListaCiudad listaCiudad;
@@ -46,20 +45,19 @@ public class sistema implements Isistema {
     //POST: Inicializa las listas y setea la cantidad de ciudades
     @Override
     public TipoRet crearSistemaDeEmergencias(int cantidadCiudades) {
-        listaAmbulancias = new ListaAmbulancia();
-        listaChofer = new ListaChofer();
-        listaCiudad = new ListaCiudad();
-        mapa = new int[cantidadCiudades][cantidadCiudades];
 
         //Inicializa el mapa en -1
-        for (int i = 0; i < cantidadCiudades; i++) {
-            for (int j = 0; j < cantidadCiudades; j++) {
-                mapa[i][j] = -1;
-            }
-        }
-
         if (cantidadCiudades > 0) {
+            listaAmbulancias = new ListaAmbulancia();
+            listaChofer = new ListaChofer();
+            listaCiudad = new ListaCiudad();
+            mapa = new int[cantidadCiudades+1][cantidadCiudades+1];
             listaCiudad.setSize(cantidadCiudades);
+            for (int i = 1; i <= cantidadCiudades; i++) {
+                for (int j = 1; j <= cantidadCiudades; j++) {
+                    mapa[i][j] = -1;
+                }
+            }
             System.out.println("El sistema de emergencias pudo ser creado exitosamente");
             return TipoRet.OK;
         } else {
@@ -396,7 +394,12 @@ public class sistema implements Isistema {
             //Imprime en pantalla que? el ID o el nombre? ver ya que sería mucho más eficiente que solo sea el ID
             for (int i = 1; i < col; i++) {
                 if (mapa[ciudadID][i] <= duracionViaje && mapa[ciudadID][i] > 0) {
-                    System.out.println("Ciudad: " + listaCiudad.getCiudad(mapa[ciudadID][i]).getNombre() + "\n");
+                    System.out.println("Ciudad: " + listaCiudad.getCiudad(mapa[ciudadID][i]).getNombre() + " - Duración: " + mapa[ciudadID][i] + "\n");
+                    for (int j = 0; j < mapa[i].length; j++) {
+                        if ((mapa[i][j] + mapa[ciudadID][i]) < duracionViaje) {
+                            System.out.println("Ciudad: " + listaCiudad.getCiudad(mapa[i][j]).getNombre() + " - Duración: " + mapa[i][j] + "\n");
+                        }
+                    }
                 }
             }
         }

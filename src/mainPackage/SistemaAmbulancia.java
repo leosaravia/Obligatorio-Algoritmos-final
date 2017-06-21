@@ -373,14 +373,18 @@ public class SistemaAmbulancia implements Isistema {
         int col = mapa[0].length;
         int rutaMasRapida;
         int ciudadIntermedia = 0;
+        String mensaje = "";
 
         Ciudad origen = listaCiudad.getCiudad(ciudadOrigen);
         Ciudad destino = listaCiudad.getCiudad(ciudadDestino);
 
         if (origen == null) {
-            System.out.println("La ciudad origen" + ciudadOrigen + " no existe.");
+            mensaje += "La ciudad origen" + ciudadOrigen + " no existe. \n";
+            if (destino == null) {
+                mensaje += "La ciudad destino" + ciudadDestino + " no existe.";
+            }
         } else if (destino == null) {
-            System.out.println("La ciudad destino" + ciudadDestino + " no existe.");
+            mensaje += "La ciudad destino" + ciudadDestino + " no existe.";
         } else {
             ret = true;
             if (mapa[ciudadOrigen][ciudadDestino] > 0) {
@@ -402,26 +406,47 @@ public class SistemaAmbulancia implements Isistema {
             }
             if (ciudadIntermedia > 0) {
                 Ciudad intermedia = listaCiudad.getCiudad(ciudadIntermedia);
-                System.out.println("Ruta más rápida: \n");
-                System.out.println("Ciudad origen: " + origen.getNombre() + " - 0 \n");
-                System.out.println("Ciudad intermedia: " + intermedia.getNombre() + " - " + mapa[ciudadOrigen][ciudadIntermedia] + "\n");
-                System.out.println("Ciudad destino: " + destino.getNombre() + " - " + mapa[ciudadOrigen][ciudadDestino] + "\n\n");
-                System.out.println("Demora total de ambulancias: " + rutaMasRapida);
+                mensaje += "Ruta más rápida: \n";
+                mensaje += "Ciudad origen: " + origen.getNombre() + " - 0 \n";
+                mensaje += "Ciudad intermedia: " + intermedia.getNombre() + " - " + mapa[ciudadOrigen][ciudadIntermedia] + "\n";
+                mensaje += "Ciudad destino: " + destino.getNombre() + " - " + mapa[ciudadOrigen][ciudadDestino] + "\n\n";
+                mensaje += "Demora total de ambulancias: " + rutaMasRapida;
             } else if (ciudadIntermedia == 0) {
-                System.out.println("Ruta más rápida: \n");
-                System.out.println("Nombre de ciudad origen: " + origen.getNombre() + " - 0 \n");
-                System.out.println("Nombre de ciudad destino: " + destino.getNombre() + " - " + mapa[ciudadOrigen][ciudadDestino] + "\n\n");
-                System.out.println("Demora total de ambulancias: " + rutaMasRapida);
+                mensaje += "Ruta más rápida: \n";
+                mensaje += "Ciudad origen: " + origen.getNombre() + " - 0 \n";
+                mensaje += "Ciudad destino: " + destino.getNombre() + " - " + mapa[ciudadOrigen][ciudadDestino] + "\n\n";
+                mensaje += "Demora total de ambulancias: " + rutaMasRapida;
             } else {
-                System.out.println("No hay ruta desde " + ciudadOrigen + " a " + ciudadDestino);
+                mensaje += "No hay ruta desde " + ciudadOrigen + " a " + ciudadDestino;
             }
         }
-        return TipoRet.OK;
+        if (ret) {
+            System.out.println(mensaje);
+            return TipoRet.OK;
+        } else {
+            System.out.println(mensaje);
+            return TipoRet.ERROR;
+        }
     }
 
     @Override
     public TipoRet informeCiudades() {
-        return TipoRet.NO_IMPLEMENTADA;
+        int fila = mapa.length;
+        int col = mapa[0].length;
+        String mensaje = "";
+
+        for (int i = 0; i < fila; i++) {
+            mensaje += "Informe de ciudad " + i + "\n";
+            for (int j = 0; j < col; j++) {
+                if (mapa[i][j] > 0) {
+                    Ciudad c = listaCiudad.getCiudad(i);
+                    mensaje += "\t Ruta directa con " + j + " - Minutos de viaje: " + mapa[i][j]
+                            + "\n\t Ambulancias disponibles: " + c.getListaAmbulancias().ambulanciasDisponibles()
+                            + "\n\t Ambulancias no disponibles: " + c.getListaAmbulancias().ambulanciasNoDisponibles() + "\n";
+                }
+            }
+        }
+        return TipoRet.OK;
     }
 
     //PRE: Ingresamos un id de ciudad y una duración de viaje
@@ -432,28 +457,30 @@ public class SistemaAmbulancia implements Isistema {
     ) {
         boolean ret = false;
         int col = mapa[0].length;
+        String mensaje = "";
 
         if (duracionViaje <= 0) {
-            System.out.println("La duración del viaje debe ser mayor a 0");
+            mensaje = "La duración del viaje debe ser mayor a 0";
         } else if (!listaCiudad.existeCiudad(ciudadID)) {
-            System.out.println("La ciudad " + ciudadID + " no existe.");
+            mensaje = "La ciudad " + ciudadID + " no existe.";
         } else {
             ret = true;
-            //Imprime en pantalla que? el ID o el nombre? ver ya que sería mucho más eficiente que solo sea el ID
             for (int i = 1; i < col; i++) {
                 if (mapa[ciudadID][i] <= duracionViaje && mapa[ciudadID][i] > 0) {
-                    System.out.println("Ciudad: " + listaCiudad.getCiudad(mapa[ciudadID][i]).getNombre() + " - Duración: " + mapa[ciudadID][i] + "\n");
+                    mensaje += "Ciudad: " + listaCiudad.getCiudad(mapa[ciudadID][i]).getNombre() + " - Duración: " + mapa[ciudadID][i] + "\n";
                     for (int j = 0; j < mapa[i].length; j++) {
                         if ((mapa[i][j] + mapa[ciudadID][i]) < duracionViaje) {
-                            System.out.println("Ciudad: " + listaCiudad.getCiudad(mapa[i][j]).getNombre() + " - Duración: " + mapa[i][j] + "\n");
+                            mensaje += "Ciudad: " + listaCiudad.getCiudad(mapa[i][j]).getNombre() + " - Duración: " + mapa[i][j] + "\n";
                         }
                     }
                 }
             }
         }
         if (ret) {
+            System.out.println(mensaje);
             return TipoRet.OK;
         } else {
+            System.out.println(mensaje);
             return TipoRet.ERROR;
         }
     }

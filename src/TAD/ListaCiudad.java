@@ -118,7 +118,7 @@ public class ListaCiudad {
         Ciudad c = null;
         boolean flag = false;
 
-        while (aux.getSiguiente() != null && !flag) {
+        while (aux!= null && !flag) {
             if (aux.valor.getCodigo() == id) {
                 flag = true;
                 c = aux.valor;

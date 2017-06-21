@@ -48,19 +48,13 @@ public class ListaAmbulancia {
             NodoAmbulancia temporal = head;
             while (temporal.obtenerSiguiente() != null) {
                 int esMayor = head.obtenerSiguiente().ObtenerValor().getIdAmbulancia().compareTo(ambulancia.getIdAmbulancia());
-                if (esMayor > 0) {
+                if (esMayor >= 0) {
                     temporal = temporal.obtenerSiguiente();
-                    /*
-                        Esto es lo que puede devolver:
-                        Número positivo: la cadena 1 es mayor que la cadena 2.
-                        0: las cadenas son iguales.
-                        Número negativo: la cadena 1 es menor que la cadena 2.
-                     */
                 } else {
                     NodoAmbulancia nuevo = new NodoAmbulancia(ambulancia);
                     nuevo.enlazarSiguiente(temporal);
                     head = nuevo;
-                    flag=true;
+                    flag = true;
                 }
             }
         }

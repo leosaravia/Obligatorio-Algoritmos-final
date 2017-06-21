@@ -21,7 +21,7 @@ public class testCrearCiudad {
        
         ISistema s = FuncionalidadesComunes.crearSistemaConCincoCiudadesDiezAmbulanciasSieteRutas();
         
-        assertEquals(ISistema.TipoRet.OK,s.ciudadesEnRadio(1, 60));
+        assertEquals(ISistema.TipoRet.OK,s.ciudadesEnRadio(1, 130));
     
     }
 }

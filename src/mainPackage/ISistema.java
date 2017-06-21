@@ -1,7 +1,7 @@
 package mainPackage;
 
 
-public interface Isistema {
+public interface ISistema {
     
     public enum TipoRet {OK, NO_IMPLEMENTADA, ERROR;}
 

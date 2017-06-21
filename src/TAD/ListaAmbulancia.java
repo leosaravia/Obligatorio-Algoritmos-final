@@ -45,16 +45,20 @@ public class ListaAmbulancia {
         } else {
             boolean flag = false;
             //creamos un nodo temporal para almacenar el head y luego lo enlazamos con el nuevo nodo que pasaria a ser el head actual
-            NodoAmbulancia temporal = head;
-            while (temporal.obtenerSiguiente() != null) {
-                int esMayor = head.obtenerSiguiente().ObtenerValor().getIdAmbulancia().compareTo(ambulancia.getIdAmbulancia());
+            NodoAmbulancia aux = head;
+            NodoAmbulancia nuevo = new NodoAmbulancia(ambulancia);
+            while (aux != null && !flag) {
+                int esMayor = aux.ObtenerValor().getIdAmbulancia().compareTo(ambulancia.getIdAmbulancia());
                 if (esMayor >= 0) {
-                    temporal = temporal.obtenerSiguiente();
-                } else {
-                    NodoAmbulancia nuevo = new NodoAmbulancia(ambulancia);
-                    nuevo.enlazarSiguiente(temporal);
-                    head = nuevo;
+                    nuevo.enlazarSiguiente(aux);
+                    head.enlazarSiguiente(nuevo);
                     flag = true;
+                } else if (aux.siguiente != null) {
+                    aux = aux.obtenerSiguiente();
+                } else {
+                    aux.enlazarSiguiente(nuevo);
+                    flag = true;
+
                 }
             }
         }

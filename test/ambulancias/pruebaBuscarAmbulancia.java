@@ -74,10 +74,10 @@ public class pruebaBuscarAmbulancia {
         s.registrarAmbulancia("SBA1234", 2);
         s.registrarAmbulancia("SBA1233", 2);
         s.registrarAmbulancia("SBA1236", 2);
-        s.registrarAmbulancia("SBA1237", 2);
+        s.registrarAmbulancia("SBA1231", 2);
         
         assertEquals(ISistema.TipoRet.OK, s.deshabilitarAmbulancia("SBA1234"));
-        assertEquals(ISistema.TipoRet.OK, s.buscarAmbulancia("SBA1234"));
+        assertEquals(ISistema.TipoRet.OK, s.buscarAmbulancia("SBA1231"));
 
         FuncionalidadesComunes.ImprimirFinDeTest();
 

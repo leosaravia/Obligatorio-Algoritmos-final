@@ -16,12 +16,5 @@ public class testCrearCiudad {
         Assert.assertEquals(ISistema.TipoRet.OK, s.agregarCiudad("Montevideo"));
     }
     
-    @Test
-    public void testCiudadesEnRadio() {
-       
-        ISistema s = FuncionalidadesComunes.crearSistemaConCincoCiudadesDiezAmbulanciasSieteRutas();
-        
-        assertEquals(ISistema.TipoRet.OK,s.ciudadesEnRadio(1, 130));
     
-    }
 }

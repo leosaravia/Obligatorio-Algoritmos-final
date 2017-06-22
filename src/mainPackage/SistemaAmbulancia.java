@@ -461,10 +461,10 @@ public class SistemaAmbulancia implements ISistema {
             ret = true;
             for (int i = 1; i < col; i++) {
                 if (mapa[ciudadID][i] <= duracionViaje && mapa[ciudadID][i] > 0) {
-                    System.out.println("Ciudad: " + listaCiudad.getCiudad(mapa[ciudadID][i]).getNombre() + " - Duración: " + mapa[ciudadID][i] + "\n");
-                    for (int j = 0; j < mapa[i].length; j++) {
-                        if ((mapa[i][j] + mapa[ciudadID][i]) < duracionViaje) {
-                            System.out.println("Ciudad: " + listaCiudad.getCiudad(mapa[i][j]).getNombre() + " - Duración: " + mapa[i][j] + "\n");
+                    System.out.println("Ciudad: " + listaCiudad.getCiudad(i).getNombre() + " - Duración: " + mapa[ciudadID][i] + "\n");
+                    for (int j = 1; j < mapa[i].length; j++) {
+                        if ((mapa[i][j] + mapa[ciudadID][i]) < duracionViaje&& mapa[i][j] > 0 && j!= ciudadID) {
+                            System.out.println("Ciudad: " + listaCiudad.getCiudad(j).getNombre() + " - Duración: " + mapa[i][j] + "\n");
                         }
                     }
                 }

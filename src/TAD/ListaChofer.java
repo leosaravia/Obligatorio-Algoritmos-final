@@ -66,41 +66,6 @@ public class ListaChofer {
         }
     }
 
-    public void agregarFinal(Chofer chofer) {
-        // Define un nuevo nodo.
-        NodoChofer nuevo = new NodoChofer(chofer);
-        // Agrega al valor al nodo.
-        nuevo.ObtenerValor();
-        // Consulta si la lista esta vacia.
-        if (esVacia()) {
-            // Inicializa la lista agregando como inicio al nuevo nodo.
-            head = nuevo;
-            // Caso contrario recorre la lista hasta llegar al ultimo nodo
-            //y agrega el nuevo.
-        } else {
-            // Crea ua copia de la lista.
-            NodoChofer aux = head;
-            // Recorre la lista hasta llegar al ultimo nodo.
-            while (aux.obtenerSiguiente() != null) {
-                aux = aux.obtenerSiguiente();
-            }
-            // Agrega el nuevo nodo al final de la lista.
-            aux.enlazarSiguiente(nuevo);
-        }
-        // Incrementa el contador de tamaño de la lista
-        size++;
-    }
-
-    //PRE:Debe existir lista
-    //POS: Elimina la lista
-    public void eliminarLista() {
-        // Elimina el valor y la referencia a los demas nodos.
-        head = null;
-        // Reinicia el contador de tamaño de la lista a 0.
-        size = 0;
-        System.out.println("Lista Chofer a sido destruida");
-    }
-
     public void listar() {
         // Verifica si la lista contiene elementoa.
         if (!esVacia()) {

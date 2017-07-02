@@ -57,41 +57,6 @@ public class ListaCiudad {
         }
     }
 
-    public void agregarFinal(Ciudad ciudad) {
-        // Define un nuevo nodo.
-        NodoCiudad nuevo = new NodoCiudad(ciudad);
-        // Agrega al valor al nodo.
-        nuevo.getValor();
-        // Consulta si la lista esta vacia.
-        if (esVacia()) {
-            // Inicializa la lista agregando como inicio al nuevo nodo.
-            head = nuevo;
-            // Caso contrario recorre la lista hasta llegar al ultimo nodo
-            //y agrega el nuevo.
-        } else {
-            // Crea ua copia de la lista.
-            NodoCiudad aux = head;
-            // Recorre la lista hasta llegar al ultimo nodo.
-            while (aux.getSiguiente() != null) {
-                aux = aux.getSiguiente();
-            }
-            // Agrega el nuevo nodo al final de la lista.
-            aux.setSiguiente(nuevo);
-        }
-        // Incrementa el contador de tamaño de la lista
-        size++;
-    }
-
-    //PRE:Debe existir lista
-    //POS: Elimina la lista
-    public void eliminarLista() {
-        // Elimina el valor y la referencia a los demas nodos.
-        head = null;
-        // Reinicia el contador de tamaño de la lista a 0.
-        size = 0;
-        System.out.println("Lista Chofer a sido destruida");
-    }
-
     public void listar() {
         // Verifica si la lista contiene elementoa.
         if (!esVacia()) {
@@ -118,7 +83,7 @@ public class ListaCiudad {
         Ciudad c = null;
         boolean flag = false;
 
-        while (aux!= null && !flag) {
+        while (aux != null && !flag) {
             if (aux.valor.getCodigo() == id) {
                 flag = true;
                 c = aux.valor;
@@ -128,41 +93,20 @@ public class ListaCiudad {
         }
         return c;
     }
-    
-    public Ciudad getCiudadNombre(String nombre) {
 
+    public boolean existeCiudad(int idciudad) {
+
+        boolean existe = false;
         NodoCiudad aux = head;
-        Ciudad c = null;
-        boolean flag = false;
-        if (head==null) {
-            return c;
-        }else{
-        while (aux != null && !flag) {
-            if (aux.valor.getNombre().equals(nombre)) {
-                flag = true;
-                c = aux.valor;
-            } else {
-                aux = aux.getSiguiente();
+        while (aux != null && !existe) {
+
+            if (aux.valor.getCodigo() == idciudad) {
+                existe = true;
             }
-        }
-        }
-        return c;
-    }
-    
-    public boolean existeCiudad(int idciudad){
- 
-        boolean existe=false;
-        NodoCiudad aux=head;
- 
-        while(aux!=null && !existe){
- 
-            if(aux.valor.getCodigo()==idciudad){
-                existe=true;
-            }
-             
+
             //Actualizamos
-            aux=aux.getSiguiente();
+            aux = aux.getSiguiente();
         }
         return existe;
-        }
+    }
 }

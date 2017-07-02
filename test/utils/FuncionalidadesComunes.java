@@ -98,9 +98,9 @@ public class FuncionalidadesComunes {
         s.registrarAmbulancia("SBT6103", 1);
         s.registrarAmbulancia("SBT6104", 1);
         s.registrarAmbulancia("SBT6105", 1);
-        s.registrarAmbulancia("SBT6106", 4);
-        s.registrarAmbulancia("SBT6107", 4);
-        s.registrarAmbulancia("SBT6108", 4);
+//        s.registrarAmbulancia("SBT6106", 4);
+//        s.registrarAmbulancia("SBT6107", 4);
+//        s.registrarAmbulancia("SBT6108", 4);
         s.registrarAmbulancia("SBT6109", 3);
 
         s.agregarRuta(5, 1, 120);

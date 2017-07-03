@@ -6,6 +6,15 @@ public class ListaCiudad {
 
     NodoCiudad head;
     int size;
+    int tope;
+
+    public int getTope() {
+        return tope;
+    }
+
+    public void setTope(int tope) {
+        this.tope = tope;
+    }
 
     public NodoCiudad getHead() {
         return head;
@@ -23,9 +32,10 @@ public class ListaCiudad {
         this.size = size;
     }
 
-    public ListaCiudad() {
+    public ListaCiudad(int tope) {
         this.head = null;
-        size = 0;
+        this.size = 0;
+        this.tope = tope;
     }
 
     public void agregarInicio(Ciudad ciudad) {

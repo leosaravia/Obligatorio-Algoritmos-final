@@ -39,7 +39,7 @@ public class ListaAmbulancia {
     }
 
     //Agrega un elemento al head(primero elemento de la lista)
-    public void agregarInicio(Ambulancia ambulancia) {
+    public void agregarOrdenado(Ambulancia ambulancia) {
         if (head == null) {
             head = new NodoAmbulancia(ambulancia);
         } else {

@@ -42,13 +42,6 @@ public class Chofer {
         this.idAmbulancia= idAmbulancia;
     }
     
-    public void eliminarChofer(Chofer chofer){
-        
-        chofer.setCedula(null);
-        chofer.setIdAmbulancia(null);
-        chofer.setNombre(null);
-    }
-    
     public String mostrarChofer(){
         return "Nombre: "+ nombre + "CI: "+ cedula;
     }

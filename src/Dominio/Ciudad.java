@@ -13,7 +13,7 @@ public class Ciudad {
     }
 
     public void setListaAmbulancias(Ambulancia ambulancias) {
-        this.listaAmbulancias.agregarInicio(ambulancias);
+        this.listaAmbulancias.agregarOrdenado(ambulancias);
     }
 
     public int getCodigo() {

@@ -1,23 +1,30 @@
 package TestsPackage;
 
 
-import mainPackage.Isistema;
 import org.junit.Assert;
 import org.junit.Test;
-import mainPackage.GestionAmbulancia;
+import mainPackage.ISistema;
+import mainPackage.SistemaAmbulancia;
 
 
 public class testBuscarAmbulancia {
     
     @Test
-    public void testBuscarAbmulanciaConId() {
-        GestionAmbulancia g = new GestionAmbulancia();
-        Assert.assertEquals(Isistema.TipoRet.OK,g.buscarAmbulancia("ABC123"));
+    public void testBuscarAbmulanciaConIdCorrecto() {
+        SistemaAmbulancia g = new SistemaAmbulancia();
+        g.crearSistemaDeEmergencias(10);
+        g.agregarCiudad("Lavalleja");
+        g.registrarAmbulancia("ABC123", 1);
+        Assert.assertEquals(ISistema.TipoRet.OK,g.buscarAmbulancia("ABC123"));
     }
-    /*@Test
-    public void testBuscarUnaAbmulanciaNoExistente() {
-        GestionAmbulancia g = new GestionAmbulancia();
-        g.inicializador();
-        Assert.assertEquals(Isistema.TipoRet.ERROR,g.buscarAmbulancia("abr485"));
-    }*/
+     @Test
+    public void testBuscarAbmulanciaConIdErrone() {
+        SistemaAmbulancia g = new SistemaAmbulancia();
+        g.crearSistemaDeEmergencias(10);
+        g.agregarCiudad("Lavalleja");
+        g.registrarAmbulancia("ABC123", 1);
+        Assert.assertEquals(ISistema.TipoRet.ERROR,g.buscarAmbulancia("ABC124"));
+    }
+    
+    
 }

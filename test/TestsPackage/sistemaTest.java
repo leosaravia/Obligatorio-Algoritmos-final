@@ -8,7 +8,6 @@ package TestsPackage;
 import TestsPackage.Inicializar;
 import Dominio.Ciudad;
 import TAD.ListaCiudad;
-import mainPackage.Isistema;
 import mainPackage.SistemaAmbulancia;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -16,6 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import mainPackage.ISistema;
 
 /**
  *
@@ -96,8 +96,8 @@ public class sistemaTest {
         int ciudadID = 1;
         SistemaAmbulancia instance = new SistemaAmbulancia();
         Inicializar ini = new Inicializar();
-        Isistema.TipoRet expResult = Isistema.TipoRet.OK;
-        Isistema.TipoRet result = instance.registrarAmbulancia(ambulanciaId, ciudadID);
+        ISistema.TipoRet expResult = ISistema.TipoRet.OK;
+        ISistema.TipoRet result = instance.registrarAmbulancia(ambulanciaId, ciudadID);
         assertEquals(expResult, result);
         if(result ==expResult)
         {
@@ -220,8 +220,8 @@ public class sistemaTest {
         System.out.println("agregarCiudad");
         String ciudadNombre = "Bella Union";
         SistemaAmbulancia instance = new SistemaAmbulancia();
-        Isistema.TipoRet expResult =  Isistema.TipoRet.OK;;
-        Isistema.TipoRet result = instance.agregarCiudad(ciudadNombre);
+        ISistema.TipoRet expResult =  ISistema.TipoRet.OK;;
+        ISistema.TipoRet result = instance.agregarCiudad(ciudadNombre);
         assertEquals(expResult, result);
         if(result ==expResult )
         {

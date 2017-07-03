@@ -39,7 +39,7 @@ public class ListaAmbulancia {
     }
 
     //Agrega un elemento al head(primero elemento de la lista)
-    public void agregarInicio(Ambulancia ambulancia) {
+    public void agregarOrdenado(Ambulancia ambulancia) {
         if (head == null) {
             head = new NodoAmbulancia(ambulancia);
         } else {
@@ -47,14 +47,21 @@ public class ListaAmbulancia {
             //creamos un nodo temporal para almacenar el head y luego lo enlazamos con el nuevo nodo que pasaria a ser el head actual
             NodoAmbulancia aux = head;
             NodoAmbulancia nuevo = new NodoAmbulancia(ambulancia);
+            NodoAmbulancia anterior = aux;
+            boolean inter = false;
             while (aux != null && !flag) {
                 int esMayor = aux.ObtenerValor().getIdAmbulancia().compareTo(ambulancia.getIdAmbulancia());
                 if (esMayor >= 0) {
+                    head = nuevo;
                     nuevo.enlazarSiguiente(aux);
-                    head.enlazarSiguiente(nuevo);
+                    if (inter) {
+                        anterior.enlazarSiguiente(nuevo);
+                    }
                     flag = true;
-                } else if (aux.siguiente != null) {
+                } else if (aux.obtenerSiguiente() != null) {
+                    anterior = aux;
                     aux = aux.obtenerSiguiente();
+                    inter = true;
                 } else {
                     aux.enlazarSiguiente(nuevo);
                     flag = true;
@@ -65,19 +72,51 @@ public class ListaAmbulancia {
         size++;
     }
 
-    //Elimina un elemento en lista
+//    //Elimina un elemento en lista
+//    public boolean eliminar(String ambulanciaID) {
+//        boolean eliminado = false;
+//        if (head != null) {
+//            NodoAmbulancia actual = head;
+//            NodoAmbulancia aux = null;
+//            while (actual != null && !eliminado) {
+//                if (actual.ObtenerValor().getIdAmbulancia().equals(ambulanciaID)) {
+//                    actual.setValor(null);
+//                    eliminado = true;
+//                    size--;
+//                }
+//                if (!eliminado) {
+//                    if (actual.obtenerSiguiente() != null) {
+//                        aux.enlazarSiguiente(actual.obtenerSiguiente());
+//                    } else {
+//                        actual = actual.obtenerSiguiente();
+//                    }
+//                }
+//            }
+//        }
+//        return eliminado;
+//    }
+    //Ver si este funciona bien
     public boolean eliminar(String ambulanciaID) {
-        boolean flag = false;
-        NodoAmbulancia aux = head;
-        while (aux != null && !flag) {
-            if (aux.valor.getIdAmbulancia().equals(ambulanciaID)) {
-                aux.valor = null;
-                flag = true;
-            } else {
+        boolean eliminado = false;
+        if (!esVacia()) {
+            NodoAmbulancia aux = head;
+            if (aux.ObtenerValor().getIdAmbulancia().equals(ambulanciaID)) {
                 aux = aux.obtenerSiguiente();
+                eliminado = true;
+            } else {
+                while (aux.ObtenerValor() != null) {
+                    if (aux.ObtenerValor().getIdAmbulancia().equals(ambulanciaID)) {
+                        aux.setValor(null);
+                        eliminado = true;
+                    } else if (aux.siguiente != null) {
+                        aux = aux.obtenerSiguiente();
+                    } else {
+                        aux = null;
+                    }
+                }
             }
         }
-        return flag;
+        return eliminado;
     }
 
     //Elimina el primer elemento de la Lista
@@ -95,41 +134,6 @@ public class ListaAmbulancia {
         while (head != null) {
             borrarInicio();
         }
-    }
-
-    public void agregarFinal(Ambulancia ambulancia) {
-        // Define un nuevo nodo.
-        NodoAmbulancia nuevo = new NodoAmbulancia(ambulancia);
-        // Agrega al valor al nodo.
-        nuevo.ObtenerValor();
-        // Consulta si la lista esta vacia.
-        if (esVacia()) {
-            // Inicializa la lista agregando como inicio al nuevo nodo.
-            head = nuevo;
-            // Caso contrario recorre la lista hasta llegar al ultimo nodo
-            //y agrega el nuevo.
-        } else {
-            // Crea una copia de la lista.
-            NodoAmbulancia aux = head;
-            // Recorre la lista hasta llegar al ultimo nodo.
-            while (aux.obtenerSiguiente() != null) {
-                aux = aux.obtenerSiguiente();
-            }
-            // Agrega el nuevo nodo al final de la lista.
-            aux.enlazarSiguiente(nuevo);
-        }
-        // Incrementa el contador de tamaño de la lista
-        size++;
-    }
-
-    //PRE:Debe existir lista
-    //POS: Elimina la lista
-    public void eliminarLista() {
-        // Elimina el valor y la referencia a los demas nodos.
-        head = null;
-        // Reinicia el contador de tamaño de la lista a 0.
-        size = 0;
-        System.out.println("Lista Ambulancia a sido destruida");
     }
 
     //Devuelve la cantidad de ambulancias habilitadas 
@@ -200,19 +204,16 @@ public class ListaAmbulancia {
     }
 
     public boolean existeAmbulancia(String idAmb) {
-
         boolean existe = false;
 
         NodoAmbulancia aux = head;
-
-        while (aux != null && !existe) {
-
-            if (aux.ObtenerValor().equals(idAmb)) {
-                existe = true;
+        if (!esVacia()) {
+            while (aux != null&&!existe) {
+                if (aux.ObtenerValor().getIdAmbulancia().equals(idAmb)) {
+                    existe = true;
+                }
+                aux = aux.obtenerSiguiente();
             }
-
-            //Actualizamos
-            aux = aux.obtenerSiguiente();
         }
         return existe;
     }

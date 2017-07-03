@@ -40,5 +40,4 @@ public class testCrearAmbulancia {
         Assert.assertEquals(ISistema.TipoRet.OK, g.registrarAmbulancia("ZBC456", 3));
     }
     
-    //Agegar cuando no existe la cuidad. 
 }
